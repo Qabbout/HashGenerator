@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.hashgen.databinding.FragmentHomeBinding
@@ -13,6 +14,8 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
+    private val homeViewModel: HomeViewModel by viewModels()
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -46,6 +49,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.clear_menu) {
+            binding.plainText.text.clear()
+            showSnackBar("Cleared.")
+            return true
+        }
+        return true
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
     }
@@ -57,9 +70,18 @@ class HomeFragment : Fragment() {
         } else {
             lifecycleScope.launch {
                 applyAnimations()
+                getHashData()
                 navigateToSuccess()
+
             }
         }
+    }
+
+    private fun getHashData(): String {
+        val algorithm = binding.autoCompleteTextView.text.toString()
+        val plainText = binding.plainText.text.toString()
+        return homeViewModel.getHash(plainText, algorithm)
+
     }
 
     private suspend fun applyAnimations() {
