@@ -21,6 +21,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        val hashAlgorithms = resources.getStringArray(R.array.hash_algorithms)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdonw_item, hashAlgorithms)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,9 +36,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
 
-        val hashAlgorithms = resources.getStringArray(R.array.hash_algorithms)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdonw_item, hashAlgorithms)
-        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
 
         binding.generateButton.setOnClickListener {
             lifecycleScope.launch {
