@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.hashgen.databinding.FragmentHomeBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -39,10 +40,7 @@ class HomeFragment : Fragment() {
 
 
         binding.generateButton.setOnClickListener {
-            lifecycleScope.launch {
-                applyAnimations()
-                navigateToSuccess()
-            }
+            onGenerateClicked()
 
         }
         return binding.root
@@ -50,6 +48,18 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
+    }
+
+    private fun onGenerateClicked() {
+        if (binding.plainText.text.isEmpty()) {
+            showSnackBar("Field Empty")
+
+        } else {
+            lifecycleScope.launch {
+                applyAnimations()
+                navigateToSuccess()
+            }
+        }
     }
 
     private suspend fun applyAnimations() {
@@ -77,5 +87,9 @@ class HomeFragment : Fragment() {
     }
 
 
-
+    private fun showSnackBar(message: String) {
+        val snackBar = Snackbar.make(binding.rootLayout, message, Snackbar.LENGTH_SHORT)
+        snackBar.setAction("Okay") {}
+        snackBar.show()
+    }
 }
