@@ -42,6 +42,7 @@ class SuccessFragment : Fragment() {
         }
 
 
+
     }
 
     private fun copyToClipboard(hash: String) {
