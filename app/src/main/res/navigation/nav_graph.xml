@@ -20,11 +20,15 @@
     </fragment>
     <fragment
         android:id="@+id/successsFragment"
-        android:name="com.example.hashgen.SuccesssFragment"
+        android:name="com.example.hashgen.SuccessFragment"
         android:label="Success"
-        tools:layout="@layout/fragment_successs" >
+        tools:layout="@layout/fragment_successs">
         <action
             android:id="@+id/action_successsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="hash"
+            android:defaultValue="empty"
+            app:argType="string" />
     </fragment>
 </navigation>

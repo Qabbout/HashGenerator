@@ -70,8 +70,8 @@ class HomeFragment : Fragment() {
         } else {
             lifecycleScope.launch {
                 applyAnimations()
-                getHashData()
-                navigateToSuccess()
+
+                navigateToSuccess(getHashData())
 
             }
         }
@@ -104,8 +104,9 @@ class HomeFragment : Fragment() {
         delay(1500L)
     }
 
-    private fun navigateToSuccess() {
-        findNavController().navigate(R.id.action_homeFragment_to_successsFragment)
+    private fun navigateToSuccess(hash: String) {
+        val directions = HomeFragmentDirections.actionHomeFragmentToSuccesssFragment(hash)
+        findNavController().navigate(directions)
     }
 
 
