@@ -54,13 +54,13 @@ class SuccessFragment : Fragment() {
     }
 
     private suspend fun applyAnimations() {
-        binding.include.messageBackground.animate().translationY(80f).duration = 200L
-        binding.include.messageTextview.animate().translationY(80f).duration = 200L
+        binding.include.messageBackground.animate().translationY(120f).duration = 200L
+        binding.include.messageTextview.animate().translationY(120f).duration = 200L
 
         delay(2000L)
 
-        binding.include.messageBackground.animate().translationY(-80f).duration = 200L
-        binding.include.messageTextview.animate().translationY(-80f).duration = 200L
+        binding.include.messageBackground.animate().translationY(-120f).duration = 200L
+        binding.include.messageTextview.animate().translationY(-120f).duration = 200L
     }
 
     override fun onDestroyView() {
