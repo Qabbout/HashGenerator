@@ -1,6 +1,6 @@
 # HashGenerator
 
-An android application written in kotlin that egenrate hash based on algorithm selection and text input.
+An android application written in kotlin that generate hashs based on algorithm selection and text input.
 
 # Screenshots
 
