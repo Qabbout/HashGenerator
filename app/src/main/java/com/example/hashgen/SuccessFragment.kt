@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hashgen.databinding.FragmentSuccesssBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SuccessFragment : Fragment() {
 
@@ -33,7 +36,11 @@ class SuccessFragment : Fragment() {
     }
 
     private fun onCopyClicked() {
-        copyToClipboard(args.hash)
+        lifecycleScope.launch {
+            copyToClipboard(args.hash)
+            applyAnimations()
+        }
+
 
     }
 
@@ -45,5 +52,18 @@ class SuccessFragment : Fragment() {
 
     }
 
+    private suspend fun applyAnimations() {
+        binding.include.messageBackground.animate().translationY(80f).duration = 200L
+        binding.include.messageTextview.animate().translationY(80f).duration = 200L
 
+        delay(2000L)
+
+        binding.include.messageBackground.animate().translationY(-80f).duration = 200L
+        binding.include.messageTextview.animate().translationY(-80f).duration = 200L
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

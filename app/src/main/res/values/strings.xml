@@ -9,6 +9,7 @@
     <string name="clear">Clear</string>
     <string name="text">Text</string>
     <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
 
     <string-array name="hash_algorithms">
         <item>SHA-256</item>
